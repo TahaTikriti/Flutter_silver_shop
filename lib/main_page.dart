@@ -20,6 +20,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   List list = [];
+
   Future<void> getData() async {
     var url = API.hostConnectGetData;
     try {
@@ -50,12 +51,61 @@ class _MainPageState extends State<MainPage> {
       appBar: AppBar(
         title: Text('Welcome To Our SilverShop'),
         centerTitle: true,
+        backgroundColor: Colors.deepPurple,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.login),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => LoginWidget()),
+              );
+            },
+            tooltip: 'Login',
+          ),
+        ],
       ),
       drawer: AppDrawer(),
-      body: Center(
-        // Changed to a Container with a Text widget for demonstration purposes
-        child: Container(
-          child: Text('Main Page'),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("Images/background.jpg"),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              buildButton(context, 'Bracelets', BraceletsPage()),
+              SizedBox(height: 10),
+              buildButton(context, 'Necklaces', NecklacesPage()),
+              SizedBox(height: 10),
+              buildButton(context, 'Earrings', EarringsPage()),
+              SizedBox(height: 10),
+              buildButton(context, 'Rings', RingsPage()),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget buildButton(BuildContext context, String title, Widget page) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 50),
+      child: ElevatedButton(
+        child: Text(title),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => page),
+          );
+        },
+        style: ElevatedButton.styleFrom(
+          primary: Colors.deepPurple, // Button color
+          onPrimary: Colors.white, // Text color
         ),
       ),
     );

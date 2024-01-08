@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:silvershop/admin_page.dart';
 import 'login_page.dart';
 import 'profile_page.dart';
 import 'about_page.dart';
@@ -16,7 +17,7 @@ class AppDrawer extends StatelessWidget {
         children: [
           DrawerHeader(
             decoration: BoxDecoration(
-              color: Colors.blue,
+              color: Colors.deepPurple[800],
             ),
             child: Text(
               'Menu',
@@ -95,6 +96,15 @@ class AppDrawer extends StatelessWidget {
               );
             },
           ),
+          ListTile(
+            title: Text('Admin Page'), // Navigates to EarringsPage
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AdminPage()),
+              );
+            },
+          )
         ],
       ),
     );
